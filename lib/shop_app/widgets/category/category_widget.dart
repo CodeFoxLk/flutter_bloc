@@ -1,3 +1,4 @@
+import 'package:bloc_pattern/shop_app/widgets/product/bloc/product_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/category_bloc.dart';
@@ -20,12 +21,17 @@ class Categories extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {
-                      context.read<CategoryBloc>().add(SelectCategory(selectedCategory: state.categories[index]));
+                      context.read<CategoryBloc>().add(SelectCategory(
+                            selectedCategory: state.categories[index],
+                          ));
+                      context.read<ProductBloc>().add(GetProductByCategory(
+                          category: state.categories[index]));
                     },
                     child: BlocBuilder<CategoryBloc, CategoryState>(
                         //  buildWhen: (previous, current) => state.categories[index] == current.selectedCategory,
                         builder: (context, selectedState) {
-                      final bool isSelected = state.categories[index] == selectedState.selectedCategory;
+                      final bool isSelected = state.categories[index] ==
+                          selectedState.selectedCategory;
                       return Ink(
                         padding: const EdgeInsets.all(10),
                         decoration: ShapeDecoration(

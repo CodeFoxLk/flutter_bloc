@@ -10,7 +10,7 @@ extension CategoryStatusX on CategoryStatus {
   bool get isSelected => this == CategoryStatus.selected;
 }
 
-class CategoryState extends Equatable {
+class CategoryState{
   const CategoryState({
     this.status = CategoryStatus.initial,
     List<String>? categories,
@@ -22,9 +22,7 @@ class CategoryState extends Equatable {
   final CategoryStatus status;
   final String selectedCategory;
 
-  @override
-  List<Object?> get props => [status, categories, selectedCategory];
-
+  
   CategoryState copyWith({
     List<String>? categories,
     CategoryStatus? status,

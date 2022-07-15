@@ -1,18 +1,19 @@
 part of 'category_bloc.dart';
 
-class CategoryEvent extends Equatable {
-  @override
-  List<Object?> get props => [];
+abstract class CategoryEvent{
+  ProductBloc? productBloc;
+  CategoryEvent({this.productBloc});
 }
 
-class GetCategories extends CategoryEvent {}
+class GetCategories extends CategoryEvent {
+  @override
+  GetCategories({super.productBloc});
+}
 
 class SelectCategory extends CategoryEvent {
   SelectCategory({
     required this.selectedCategory,
+    super.productBloc, 
   });
   final String selectedCategory;
-
-  @override
-  List<Object?> get props => [selectedCategory];
 }

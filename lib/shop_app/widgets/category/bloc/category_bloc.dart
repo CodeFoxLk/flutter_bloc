@@ -1,5 +1,5 @@
 import 'package:bloc_pattern/shop_app/repositories/categories.dart';
-import 'package:equatable/equatable.dart';
+import 'package:bloc_pattern/shop_app/widgets/product/bloc/product_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'category_events.dart';
@@ -18,7 +18,8 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   }
   final CategoriesRepository categoryRepository;
 
-  void _mapGetCategoriesEventToState(GetCategories event, Emitter<CategoryState> emit) async {
+  void _mapGetCategoriesEventToState(
+      GetCategories event, Emitter<CategoryState> emit) async {
     emit(state.copyWith(status: CategoryStatus.loading));
     try {
       final categories = await categoryRepository.getAllCategories() ?? [];
@@ -28,25 +29,31 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
           categories: categories,
         ),
       );
+
       if (categories.isNotEmpty) {
-        emit(
-          state.copyWith(
-            status: CategoryStatus.selected,
-            selectedCategory: categories[0],
-          ),
-       );
+        add(SelectCategory(selectedCategory: categories[0], productBloc: event.productBloc));
       }
     } catch (error) {
       emit(state.copyWith(status: CategoryStatus.error));
     }
   }
 
-  void _mapSelectCategoryEventToState(SelectCategory event, Emitter<CategoryState> emit) async {
-    emit(
+  void _mapSelectCategoryEventToState(
+      SelectCategory event, Emitter<CategoryState> emit) async {
+     emit(
       state.copyWith(
         status: CategoryStatus.selected,
         selectedCategory: event.selectedCategory,
       ),
     );
+
+    _getProductByCategort(event);
+  }
+
+  _getProductByCategort(SelectCategory event) {
+    if (event.productBloc != null) {
+      event.productBloc!
+          .add(GetProductByCategory(category: event.selectedCategory));
+    }
   }
 }
