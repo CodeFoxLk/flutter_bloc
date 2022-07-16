@@ -6,7 +6,6 @@ class CategoriesRepository{
     final response = await http.get(
       Uri.parse("https://fakestoreapi.com/products/categories")
     );
-    print(response.body);
     if (response.statusCode == 200) {
       if (response.body.isNotEmpty) {
         return List<String>.from(json.decode(response.body).map((category) => category));

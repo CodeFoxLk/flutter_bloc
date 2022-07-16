@@ -1,8 +1,5 @@
+import 'package:bloc_pattern/bloc-simple_app/app.dart';
 import 'package:flutter/material.dart';
-
-import 'cubit-simple_app/app.dart';
-import 'shop_app/app.dart';
-
 void main() {
-  runApp(const RandomNamePicker());
+  runApp(const SimpleBlocApp());
 }

@@ -52,8 +52,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: SafeArea(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextButton(
                 onPressed: () {
