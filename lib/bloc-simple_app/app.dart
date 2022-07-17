@@ -1,5 +1,6 @@
-import 'package:bloc_pattern/bloc-simple_app/repositories/models/user_model.dart';
-import 'package:bloc_pattern/bloc-simple_app/repositories/user_repository.dart';
+import 'package:bloc_pattern/bloc-simple_app/bloc/bloc.dart';
+import 'package:bloc_pattern/bloc-simple_app/bloc/events.dart';
+import 'package:bloc_pattern/bloc-simple_app/bloc/state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,44 +13,6 @@ class SimpleBlocApp extends StatelessWidget {
       home: BlocProvider(
           create: (context) => UserBloc(), child: const HomePage()),
     );
-  }
-}
-
-@immutable
-abstract class LoadAction {
-  const LoadAction();
-}
-
-class LoadUserAction extends LoadAction {}
-
-class UserState {
-  final List<User> users;
-
-  const UserState({required this.users});
-
-  @override
-  String toString() {
-    return 'Fetch result - (users = $users)';
-  }
-}
-
-class UserBloc extends Bloc<LoadAction, UserState?> {
-  UserRepository? userRepository;
-  List<User>? users;
-
-  UserBloc({this.userRepository}) : super(null) {
-    on<LoadAction>(_loadUsers);
-  }
-
-  void _loadUsers(LoadAction event, Emitter<UserState?> emit) async {
-    try {
-      userRepository ??= UserRepository();
-      users ??= await userRepository!.getAllUsers();
-      print(users);
-      emit(UserState(users: users!));
-    } catch (e) {
-      emit(const UserState(users: []));
-    }
   }
 }
 
