@@ -17,6 +17,7 @@ const names = <String>['foo', 'bar', 'baz'];
 
 //list is an Iterable. so we can create a custom method to do somthing for Iterables which also, works with a list
 extension RandomElement<T> on Iterable<T> {
+  
   T pickRandom() => elementAt(math.Random().nextInt(length));
 }
 

@@ -28,5 +28,6 @@ class UserBloc extends Bloc<LoadAction, UserState?> {
 
   FutureOr<void> _testUsers(TestUserAction event, Emitter<UserState?> emit) {
     emit(UserState(users: [User(name: "Eshan")]));
+    
   }
 }
