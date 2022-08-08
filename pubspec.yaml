@@ -17,6 +17,11 @@ dependencies:
   http: ^0.13.4
   flutter_hooks: ^0.18.5+1
   collection: ^1.16.0
+  firebase_auth: ^3.6.2
+  firebase_core: ^1.20.0
+  firebase_storage: ^10.3.4
+  uuid: ^3.0.6
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

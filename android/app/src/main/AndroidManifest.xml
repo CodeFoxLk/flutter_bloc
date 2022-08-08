@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.bloc_pattern">
+    package="com.codefoxlk.bloc_pattern">
    <application
         android:label="bloc_pattern"
         android:name="${applicationName}"
