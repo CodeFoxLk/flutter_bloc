@@ -19,7 +19,6 @@ class UserBloc extends Bloc<LoadAction, UserState?> {
     try {
       userRepository ??= UserRepository();
       users ??= await userRepository!.getAllUsers();
-      print(users);
       emit(UserState(users: users!));
     } catch (e) {
       emit(const UserState(users: []));

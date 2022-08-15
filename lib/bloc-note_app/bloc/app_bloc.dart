@@ -66,9 +66,6 @@ class AppBloc extends Bloc<AppActions, AppState> {
 
     //fetch notes
     final notes = await noteApiProtocol.getNotes(loginHandler: state.loginHandler!);
-    
-    print(notes);
-
     emit(AppState(
           isLoading: false,
           loginErrors: null,
